@@ -1,0 +1,93 @@
+
+mysql> CREATE DATABASE company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| batch1318_db       |
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> USE company;
+Database changed
+mysql> CREATE TABLE emp (emp_name VARCHAR(50),department VARCHAR(50),salary DECIMAL(10,2), date_of_joining DATE, email VARCHAR(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE emp;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| emp_name        | varchar(50)   | YES  |     | NULL    |       |
+| department      | varchar(50)   | YES  |     | NULL    |       |
+| salary          | decimal(10,2) | YES  |     | NULL    |       |
+| date_of_joining | date          | YES  |     | NULL    |       |
+| email           | varchar(50)   | YES  |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE emp ADD COLUMN timing INT;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE emp DROP COLUMN timing;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE emp;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| emp_name        | varchar(50)   | YES  |     | NULL    |       |
+| department      | varchar(50)   | YES  |     | NULL    |       |
+| salary          | decimal(10,2) | YES  |     | NULL    |       |
+| date_of_joining | date          | YES  |     | NULL    |       |
+| email           | varchar(50)   | YES  |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE emp RENAME COLUMN salary TO emp_salary;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE emp TO EMPLOYEE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TO EMPLOYEE' at line 1
+mysql> ALTER TABLE emp RENAME TO EMPLOYEE;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESCRIBE EMPLOYEE;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| emp_name        | varchar(50)   | YES  |     | NULL    |       |
+| department      | varchar(50)   | YES  |     | NULL    |       |
+| emp_salary      | decimal(10,2) | YES  |     | NULL    |       |
+| date_of_joining | date          | YES  |     | NULL    |       |
+| email           | varchar(50)   | YES  |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE EMPLOYEE MODIFY salary FLOAT;
+ERROR 1054 (42S22): Unknown column 'salary' in 'employee'
+mysql> ALTER TABLE EMPLOYEE MODIFY emp_salary FLOAT;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE EMPLOYEE;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| emp_name        | varchar(50) | YES  |     | NULL    |       |
+| department      | varchar(50) | YES  |     | NULL    |       |
+| emp_salary      | float       | YES  |     | NULL    |       |
+| date_of_joining | date        | YES  |     | NULL    |       |
+| email           | varchar(50) | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
